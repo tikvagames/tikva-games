@@ -5,17 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tikva Games</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Roboto',sans-serif;background:#000;color:#fff;overflow-x:hidden;cursor:none;}
+body{
+  font-family:'Inter',sans-serif;
+  background:#ffffff;
+  color:#111;
+  overflow-x:hidden;
+  cursor:none;
+}
 
 /* Cursor */
 .cursor{
   position:fixed;
-  width:25px;height:25px;
-  border:2px solid #fff;
+  width:20px;height:20px;
+  border:2px solid #6c5ce7;
   border-radius:50%;
   pointer-events:none;
   transform:translate(-50%,-50%);
@@ -30,13 +36,28 @@ nav{
   justify-content:space-between;
   align-items:center;
   padding:20px 50px;
-  background:rgba(0,0,0,0.6);
+  background:rgba(255,255,255,0.7);
+  backdrop-filter:blur(10px);
   z-index:1000;
 }
-.logo{font-family:'Orbitron';font-size:1.8rem;}
-nav ul{display:flex;gap:25px;list-style:none;}
-nav a{color:#fff;text-decoration:none;}
-nav a:hover{color:#22c55e;}
+.logo{
+  font-family:'Orbitron';
+  font-size:1.6rem;
+  color:#6c5ce7;
+}
+nav ul{
+  display:flex;
+  gap:25px;
+  list-style:none;
+}
+nav a{
+  color:#333;
+  text-decoration:none;
+  font-weight:500;
+}
+nav a:hover{
+  color:#6c5ce7;
+}
 
 /* Hero */
 .hero{
@@ -52,21 +73,15 @@ nav a:hover{color:#22c55e;}
   width:100%;
   height:100%;
   object-fit:cover;
-  filter:brightness(0.3);
+  opacity:0.15;
 }
 
-/* Glow Light */
+/* Soft Light */
 .light{
   position:absolute;
-  width:600px;height:600px;
-  background:radial-gradient(circle,#22c55e55,transparent);
-  filter:blur(120px);
-  animation:pulse 4s infinite;
-}
-@keyframes pulse{
-  0%{opacity:0.3;}
-  50%{opacity:0.8;}
-  100%{opacity:0.3;}
+  width:500px;height:500px;
+  background:radial-gradient(circle,#6c5ce733,transparent);
+  filter:blur(100px);
 }
 
 /* Hero Content */
@@ -76,13 +91,13 @@ nav a:hover{color:#22c55e;}
 }
 .hero h1{
   font-family:'Orbitron';
-  font-size:4rem;
-  color:#22c55e;
-  text-shadow:0 0 20px #22c55e;
+  font-size:3.5rem;
+  color:#111;
 }
 .hero p{
   margin-top:10px;
   font-size:1.2rem;
+  color:#555;
 }
 
 /* Buttons */
@@ -90,20 +105,21 @@ nav a:hover{color:#22c55e;}
   margin-top:25px;
 }
 .btn{
-  padding:15px 35px;
+  padding:14px 30px;
   border-radius:30px;
-  border:2px solid #22c55e;
+  border:2px solid #6c5ce7;
   margin:10px;
-  color:#fff;
+  color:#6c5ce7;
   text-decoration:none;
   display:inline-block;
   transition:0.3s;
+  font-weight:600;
 }
 .btn:hover{
-  background:#22c55e;
-  color:#000;
-  box-shadow:0 0 25px #22c55e;
-  transform:scale(1.1);
+  background:#6c5ce7;
+  color:#fff;
+  box-shadow:0 5px 20px rgba(108,92,231,0.4);
+  transform:scale(1.05);
 }
 
 /* Sections */
@@ -121,6 +137,7 @@ section.active{
 h2{
   font-family:'Orbitron';
   margin-bottom:40px;
+  color:#6c5ce7;
 }
 
 /* Features */
@@ -131,15 +148,16 @@ h2{
   flex-wrap:wrap;
 }
 .card{
-  background:#111;
+  background:#f8f9ff;
   padding:25px;
   border-radius:15px;
   width:280px;
   transition:0.3s;
+  border:1px solid #eee;
 }
 .card:hover{
   transform:translateY(-10px);
-  box-shadow:0 0 20px #22c55e;
+  box-shadow:0 10px 30px rgba(0,0,0,0.1);
 }
 
 /* Screenshots */
@@ -155,14 +173,15 @@ h2{
   transition:0.3s;
 }
 .screens img:hover{
-  transform:scale(1.1);
-  box-shadow:0 0 30px #22c55e;
+  transform:scale(1.05);
+  box-shadow:0 10px 25px rgba(0,0,0,0.15);
 }
 
 /* Footer */
 footer{
   padding:30px;
-  background:#111;
+  background:#f1f3f8;
+  color:#666;
 }
 </style>
 </head>
@@ -182,8 +201,9 @@ footer{
 
 <div class="hero">
   <video autoplay muted loop playsinline>
-  <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-</video>
+    <source src="hero-video.mp4" type="video/mp4">
+  </video>
+
   <div class="light"></div>
 
   <div class="hero-content" id="heroContent">
