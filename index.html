@@ -7,66 +7,66 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* Reset */
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Roboto', sans-serif; background: #000; color: #fff; overflow-x: hidden; cursor: none; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Roboto', sans-serif; background:#000; color:#fff; overflow-x:hidden; cursor:none; }
 
-/* Custom cursor */
-.cursor { position: fixed; top: 0; left: 0; width: 25px; height: 25px; border: 2px solid #fff; border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%); transition: transform 0.1s ease-out; z-index: 10000; }
+/* Cursor */
+.cursor { position:fixed; top:0; left:0; width:25px; height:25px; border:2px solid #fff; border-radius:50%; pointer-events:none; transform:translate(-50%,-50%); transition: transform 0.05s ease; z-index:10000; }
 
 /* Navigation */
 nav {
-  position: fixed; top: 0; left: 0; right: 0;
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 20px 50px; background: rgba(0,0,0,0.85); z-index: 1000;
+  position:fixed; top:0; left:0; right:0; display:flex; justify-content:space-between; align-items:center;
+  padding:20px 50px; background:rgba(0,0,0,0.85); z-index:1000;
 }
-nav .logo { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; color: #fff; letter-spacing: 1px; }
-nav ul { list-style: none; display: flex; gap: 25px; }
-nav ul li a { font-weight: 500; padding: 6px 10px; transition: 0.3s; color: #fff; }
-nav ul li a:hover { color: #22c55e; }
+nav .logo { font-family:'Orbitron', sans-serif; font-size:1.8rem; color:#fff; letter-spacing:1px; }
+nav ul { list-style:none; display:flex; gap:25px; }
+nav ul li a { font-weight:500; padding:6px 10px; color:#fff; transition:0.3s; }
+nav ul li a:hover { color:#22c55e; }
 
-/* Hero section */
-.hero {
-  height: 100vh;
-  display: flex; align-items: center; justify-content: center;
-  position: relative; overflow: hidden;
-}
-.slides { display: flex; transition: transform 1s ease-in-out; }
-.slide { min-width: 100%; height: 100%; position: relative; display: flex; align-items: center; justify-content: center; }
-.slide img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.3); }
-.slide-content { position: absolute; text-align: center; color: #fff; }
-.slide-content h1 { font-family: 'Orbitron', sans-serif; font-size: 3rem; margin-bottom: 15px; color: #fff; text-shadow: 0 0 15px #fff; }
-.slide-content p { font-size: 1.2rem; max-width: 600px; margin: 0 auto; text-shadow: 0 0 8px #fff; }
-.slide-buttons { margin-top: 25px; display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
-.btn { padding: 14px 30px; border-radius: 30px; font-weight: 700; font-size: 1.1rem; text-decoration: none; transition: all 0.3s; border: 2px solid #fff; color: #fff; display: inline-block; }
-.btn:hover { background: #fff; color: #000; transform: scale(1.05); }
+/* Hero with particles */
+.hero { height:100vh; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
+.slides { display:flex; transition: transform 1s ease-in-out; }
+.slide { min-width:100%; height:100%; position:relative; display:flex; align-items:center; justify-content:center; }
+.slide img { width:100%; height:100%; object-fit:cover; filter:brightness(0.3); }
+.slide-content { position:absolute; text-align:center; color:#fff; transition: transform 0.5s ease; }
+.slide-content h1 { font-family:'Orbitron', sans-serif; font-size:3rem; margin-bottom:15px; color:#fff; text-shadow:0 0 15px #fff; }
+.slide-content p { font-size:1.2rem; max-width:600px; margin:0 auto; text-shadow:0 0 8px #fff; }
+.slide-buttons { margin-top:25px; display:flex; gap:20px; justify-content:center; flex-wrap:wrap; }
+.btn { padding:14px 30px; border-radius:30px; font-weight:700; font-size:1.1rem; text-decoration:none; border:2px solid #fff; color:#fff; display:inline-block; transition: all 0.3s; }
+.btn:hover { background:#22c55e; color:#000; transform:scale(1.05); box-shadow:0 0 15px #22c55e; }
 
 /* Sections */
-section { padding: 80px 50px; max-width: 1200px; margin: 0 auto; }
-section h2 { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; color: #fff; margin-bottom: 50px; text-align: center; text-shadow: 0 0 8px #fff; }
+section { padding:80px 50px; max-width:1200px; margin:0 auto; opacity:0; transform: translateY(40px); transition: all 1s ease; }
+section.active { opacity:1; transform:translateY(0); }
+section h2 { font-family:'Orbitron', sans-serif; font-size:2.5rem; color:#fff; margin-bottom:50px; text-align:center; text-shadow:0 0 8px #fff; }
 
 /* Features */
-.features { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; }
-.feature-card { background: #111; padding: 25px; border-radius: 15px; width: 300px; box-shadow: 0 0 15px #fff33a; transition: transform 0.3s, box-shadow 0.3s; }
-.feature-card:hover { transform: translateY(-10px); box-shadow: 0 0 25px #22c55eee; }
-.feature-card h3 { color: #fff; margin-bottom: 12px; font-size: 1.5rem; }
-.feature-card p { font-size: 1rem; color: #ccc; }
+.features { display:flex; flex-wrap:wrap; gap:30px; justify-content:center; }
+.feature-card { background:#111; padding:25px; border-radius:15px; width:300px; box-shadow:0 0 15px #fff33a; transition: transform 0.3s, box-shadow 0.3s; }
+.feature-card:hover { transform:translateY(-10px); box-shadow:0 0 25px #22c55eee; }
+.feature-card h3 { color:#fff; margin-bottom:12px; font-size:1.5rem; }
+.feature-card p { font-size:1rem; color:#ccc; }
 
 /* Screenshots */
-.screenshots-container { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
-.screenshots-container img { width: 250px; border-radius: 15px; box-shadow: 0 0 20px #fff; transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; }
-.screenshots-container img:hover { transform: scale(1.05); box-shadow: 0 0 30px #fff; }
+.screenshots-container { display:flex; flex-wrap:wrap; gap:20px; justify-content:center; }
+.screenshots-container img { width:250px; border-radius:15px; box-shadow:0 0 20px #fff; transition: transform 0.3s, box-shadow 0.3s; cursor:pointer; }
+.screenshots-container img:hover { transform:scale(1.1); box-shadow:0 0 40px #22c55e; }
 
 /* Footer */
-footer { text-align: center; padding: 40px; background: #111; color: #aaa; }
+footer { text-align:center; padding:40px; background:#111; color:#aaa; }
 
 /* Responsive */
-@media(max-width: 768px) { nav { padding: 15px 20px; } .features { flex-direction: column; align-items: center; } .slide-content h1 { font-size: 2rem; } .slide-content p { font-size: 1rem; } }
+@media(max-width:768px){ nav{padding:15px 20px;} .features{flex-direction:column; align-items:center;} .slide-content h1{font-size:2rem;} .slide-content p{font-size:1rem;} }
+
+/* Particles */
+.particles { position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; }
+.particle { position:absolute; width:4px; height:4px; background:#fff; border-radius:50%; opacity:0.7; animation: float 8s linear infinite; }
+@keyframes float { 0%{transform:translateY(0) translateX(0);} 50%{transform:translateY(-300px) translateX(100px);} 100%{transform:translateY(0) translateX(-50px);} }
 </style>
 </head>
 <body>
 
 <div class="cursor" id="cursor"></div>
-
 <nav>
   <div class="logo">Tikva Games</div>
   <ul>
@@ -77,6 +77,7 @@ footer { text-align: center; padding: 40px; background: #111; color: #aaa; }
 </nav>
 
 <div class="hero">
+  <canvas class="particles" id="particles"></canvas>
   <div class="slides">
     <div class="slide">
       <img src="slide1.jpg" alt="Slide 1">
@@ -94,17 +95,6 @@ footer { text-align: center; padding: 40px; background: #111; color: #aaa; }
       <div class="slide-content">
         <h1>Challenge Your Skills</h1>
         <p>Fast-paced, fun, and rewarding gameplay.</p>
-        <div class="slide-buttons">
-          <a href="https://play.google.com/store" target="_blank" class="btn">Google Play</a>
-          <a href="https://linkedin.com/company/tikva-games" target="_blank" class="btn">LinkedIn</a>
-        </div>
-      </div>
-    </div>
-    <div class="slide">
-      <img src="slide3.jpg" alt="Slide 3">
-      <div class="slide-content">
-        <h1>Join the Community</h1>
-        <p>Connect with gamers worldwide and earn rewards.</p>
         <div class="slide-buttons">
           <a href="https://play.google.com/store" target="_blank" class="btn">Google Play</a>
           <a href="https://linkedin.com/company/tikva-games" target="_blank" class="btn">LinkedIn</a>
@@ -157,16 +147,39 @@ footer { text-align: center; padding: 40px; background: #111; color: #aaa; }
 const slides = document.querySelector('.slides');
 const totalSlides = slides.children.length;
 let index = 0;
-setInterval(() => {
-  index = (index + 1) % totalSlides;
-  slides.style.transform = `translateX(-${index * 100}%)`;
-}, 5000);
+setInterval(() => { index = (index+1)%totalSlides; slides.style.transform = `translateX(-${index*100}%)`; }, 5000);
 
-// Interactive cursor
+// Cursor
 const cursor = document.getElementById('cursor');
-document.addEventListener('mousemove', e => {
-  cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+document.addEventListener('mousemove', e => { cursor.style.transform = `translate(${e.clientX}px,${e.clientY}px)`; });
+
+// Fade-in sections on scroll
+const sections = document.querySelectorAll('section');
+window.addEventListener('scroll', () => {
+  sections.forEach(sec => {
+    const rect = sec.getBoundingClientRect();
+    if(rect.top < window.innerHeight-100) sec.classList.add('active');
+  });
 });
+
+// Particles
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+const particlesArr = [];
+class Particle{
+  constructor(){ this.x=Math.random()*canvas.width; this.y=Math.random()*canvas.height; this.size=Math.random()*2+1; this.speedX=Math.random()*1-0.5; this.speedY=Math.random()*0.5+0.2; }
+  update(){ this.x+=this.speedX; this.y-=this.speedY; if(this.y<0) this.y=canvas.height; if(this.x>canvas.width)this.x=0; if(this.x<0)this.x=canvas.width; }
+  draw(){ ctx.fillStyle="#fff"; ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fill(); }
+}
+for(let i=0;i<120;i++) particlesArr.push(new Particle());
+function animateParticles(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particlesArr.forEach(p=>{p.update();p.draw();});
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+window.addEventListener('resize',()=>{ canvas.width=window.innerWidth; canvas.height=window.innerHeight; });
 </script>
 
 </body>
