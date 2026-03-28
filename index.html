@@ -1,388 +1,287 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Tikva Games - Think Fast, Play Faster</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tikva Games - Neon Game Experience</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
 <style>
-  /* Reset & Base */
-  * {
-    margin: 0; padding: 0; box-sizing: border-box;
-  }
-  body {
-    font-family: 'Inter', sans-serif;
-    background: #F7F9FC;
-    color: #2D3436;
-    overflow-x: hidden;
-  }
-  a {
-    text-decoration: none;
-    cursor: pointer;
-  }
+/* Reset & Base */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { 
+  background: #0b0b0f; 
+  color: #fff; 
+  font-family: 'Share Tech Mono', monospace; 
+  overflow-x: hidden; 
+  cursor: none;
+}
 
-  /* Typography */
-  h1, h2, h3 {
-    font-family: 'Orbitron', sans-serif;
-    text-transform: uppercase;
-    color: #6C5CE7;
-  }
-  h1 {
-    font-size: 3.5rem;
-    line-height: 1.1;
-  }
-  h2 {
-    font-size: 2.4rem;
-    margin-bottom: 1rem;
-  }
-  p {
-    font-size: 1.125rem;
-    line-height: 1.6;
-    color: #2D3436;
-  }
-  .subheading {
-    font-weight: 600;
-    font-size: 1.25rem;
-    color: #0984E3;
-  }
+/* Custom Cursor */
+.cursor {
+  position: fixed;
+  width: 30px;
+  height: 30px;
+  border: 2px solid #0ff;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease, background 0.2s ease;
+  z-index: 9999;
+}
 
-  /* Container */
-  .container {
-    width: 90%;
-    max-width: 1200px;
-    margin: auto;
-  }
+/* HUD Navigation */
+nav.hud {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 25px;
+  padding: 15px 30px;
+  backdrop-filter: blur(12px);
+  background: rgba(0, 255, 255, 0.05);
+  border: 1px solid #0ff;
+  border-radius: 15px;
+  animation: scan 3s infinite linear;
+  z-index: 1000;
+}
+nav.hud a {
+  color: #0ff;
+  text-decoration: none;
+  font-weight: 700;
+  position: relative;
+  transition: 0.3s;
+}
+nav.hud a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: #0ff;
+  transition: 0.3s;
+}
+nav.hud a:hover::after { width: 100%; }
 
-  /* Navbar */
-  nav {
-    background: white;
-    padding: 1rem 0;
-    box-shadow: 0 4px 12px rgba(108,92,231,0.12);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  nav .logo {
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 700;
-    font-size: 1.5rem;
-    color: #6C5CE7;
-  }
-  nav ul {
-    list-style: none;
-    display: flex;
-    gap: 2rem;
-  }
-  nav ul li a {
-    color: #2D3436;
-    font-weight: 600;
-    transition: color 0.3s ease;
-  }
-  nav ul li a:hover {
-    color: #6C5CE7;
-  }
-  nav .nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+@keyframes scan {
+  0% { box-shadow: 0 0 5px #0ffaa0; }
+  50% { box-shadow: 0 0 15px #0ff; }
+  100% { box-shadow: 0 0 5px #0ffaa0; }
+}
 
-  /* Hero Section */
-  #hero {
-    position: relative;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    background: #fff;
-    overflow: hidden;
-  }
-  #hero video {
-    position: absolute;
-    top: 50%; left: 50%;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transform: translate(-50%, -50%);
-    opacity: 0.25;
-    z-index: 0;
-  }
-  #hero .content {
-    position: relative;
-    z-index: 1;
-    max-width: 700px;
-    margin: auto;
-  }
-  #hero h1 {
-    margin-bottom: 0.5rem;
-  }
-  #hero .subheading {
-    margin-bottom: 2rem;
-  }
-  #hero .btn-group {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    flex-wrap: wrap;
-  }
-  .btn {
-    display: inline-block;
-    padding: 1rem 2.5rem;
-    font-weight: 700;
-    border-radius: 50px;
-    border: 3px solid #6C5CE7;
-    color: #6C5CE7;
-    background: transparent;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    user-select: none;
-  }
-  .btn:hover {
-    background: #6C5CE7;
-    color: white;
-    box-shadow: 0 0 15px rgba(108,92,231,0.6);
-    transform: scale(1.05);
-  }
-  /* Gamified effect: confetti burst on click */
-  .btn:active::after {
-    content: "";
-    position: absolute;
-    top: 50%; left: 50%;
-    width: 120%; height: 120%;
-    background: radial-gradient(circle, #00E676 20%, transparent 80%);
-    border-radius: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    animation: burst 0.4s forwards;
-    pointer-events: none;
-    z-index: -1;
-  }
-  @keyframes burst {
-    to {transform: translate(-50%, -50%) scale(1.5); opacity: 0;}
-  }
+/* Hero Section */
+.hero {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  perspective: 1000px;
+}
+.hero-bg {
+  position: absolute;
+  width: 120%;
+  height: 120%;
+  background: linear-gradient(135deg,#05050a,#0b0b0f);
+  top: -10%; left: -10%;
+  transform: translateZ(-100px) scale(1.2);
+}
+.hero-layer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+.hero-layer img {
+  position: absolute;
+  width: 250px;
+  transition: transform 0.2s ease;
+}
 
-  /* Trust / Awards Section */
-  #awards {
-    background: white;
-    padding: 3rem 0;
-    text-align: center;
-  }
-  #awards .award-logos {
-    display: flex;
-    justify-content: center;
-    gap: 3rem;
-    flex-wrap: wrap;
-    max-width: 900px;
-    margin: 0 auto;
-  }
-  #awards .award-logos img {
-    max-height: 60px;
-    filter: grayscale(100%);
-    opacity: 0.6;
-    transition: filter 0.3s ease, opacity 0.3s ease;
-    cursor: help;
-  }
-  #awards .award-logos img:hover {
-    filter: none;
-    opacity: 1;
-  }
+/* Hero Content */
+.hero-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  top: 35%;
+}
+.hero-content h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 4rem;
+  color: #0ff;
+  text-shadow: 0 0 20px #0ff, 0 0 40px #0ff33;
+}
+.hero-content p {
+  margin-top: 15px;
+  font-size: 1.2rem;
+  color: #0ff88;
+  text-shadow: 0 0 8px #0ff33;
+}
 
-  /* Features Section */
-  #features {
-    padding: 4rem 0;
-  }
-  #features .cards {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-  }
-  .card {
-    background: white;
-    padding: 2rem;
-    border-radius: 20px;
-    box-shadow: 0 5px 15px rgba(108,92,231,0.1);
-    width: 280px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: default;
-  }
-  .card:hover {
-    transform: translateY(-15px);
-    box-shadow: 0 15px 30px rgba(108,92,231,0.25);
-  }
-  .card h3 {
-    margin-bottom: 0.8rem;
-    color: #6C5CE7;
-  }
-  .card p {
-    color: #555;
-    font-weight: 600;
-  }
+/* Buttons */
+.btn {
+  margin-top: 30px;
+  padding: 15px 40px;
+  border: 2px solid #0ff;
+  border-radius: 30px;
+  color: #0ff;
+  text-decoration: none;
+  font-weight: bold;
+  font-family: 'Orbitron';
+  margin-right: 20px;
+  transition: 0.3s;
+}
+.btn:hover {
+  background: #0ff;
+  color: #000;
+  box-shadow: 0 0 30px #0ff;
+  transform: scale(1.1) rotate(-2deg);
+}
 
-  /* Screenshots */
-  #screenshots {
-    background: white;
-    padding: 4rem 0;
-    text-align: center;
-  }
-  #screenshots .slider {
-    max-width: 1000px;
-    margin: auto;
-    display: flex;
-    gap: 1.5rem;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-  }
-  #screenshots .slider img {
-    flex: 0 0 auto;
-    width: 300px;
-    border-radius: 16px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-    scroll-snap-align: center;
-    transition: transform 0.3s ease;
-    cursor: pointer;
-  }
-  #screenshots .slider img:hover {
-    transform: scale(1.05);
-  }
+/* Sections */
+section {
+  padding: 100px 20px;
+  text-align: center;
+}
+section h2 {
+  font-family: 'Orbitron';
+  font-size: 2.5rem;
+  margin-bottom: 50px;
+  color: #0ff;
+}
 
-  /* About Section */
-  #about {
-    padding: 4rem 0;
-    max-width: 800px;
-    margin: auto;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 8px 25px rgba(108,92,231,0.1);
-  }
-  #about p {
-    font-size: 1.125rem;
-    color: #2D3436;
-    line-height: 1.7;
-  }
+/* Cards (Games List) */
+.games-list {
+  display: flex;
+  gap: 30px;
+  overflow-x: auto;
+  padding-bottom: 30px;
+}
+.games-list::-webkit-scrollbar { display: none; }
+.game-card {
+  min-width: 250px;
+  background: rgba(0,255,255,0.05);
+  border: 1px solid #0ff;
+  border-radius: 15px;
+  padding: 20px;
+  transition: 0.3s;
+}
+.game-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 25px #0ff;
+}
 
-  /* Footer */
-  footer {
-    background: #6C5CE7;
-    padding: 1.5rem 0;
-    color: white;
-    text-align: center;
-    font-weight: 600;
-  }
+/* Dev Blog Terminal Section */
+.terminal {
+  background: rgba(0,0,0,0.9);
+  border: 1px solid #0ff;
+  border-radius: 10px;
+  padding: 30px;
+  color: #0ff;
+  font-family: 'Share Tech Mono', monospace;
+  max-width: 800px;
+  margin: 0 auto;
+}
 
-  /* Responsive */
-  @media (max-width: 768px) {
-    #features .cards {
-      flex-direction: column;
-      align-items: center;
-    }
-    nav ul {
-      gap: 1rem;
-    }
-    #screenshots .slider {
-      width: 100%;
-      overflow-x: scroll;
-    }
-  }
+/* Parallax Layers Example */
+.layer1 { top: 20%; left: 10%; }
+.layer2 { top: 50%; left: 70%; }
+.layer3 { top: 70%; left: 30%; }
+
+/* Scroll Animations */
+section { opacity: 0; transform: translateY(40px); transition: 1s; }
+section.active { opacity: 1; transform: translateY(0); }
+
 </style>
 </head>
 <body>
 
-<!-- Navbar -->
-<nav>
-  <div class="container nav-container">
-    <div class="logo">Tikva Games</div>
-    <ul>
-      <li><a href="#features">Features</a></li>
-      <li><a href="#screenshots">Screenshots</a></li>
-      <li><a href="#about">About Us</a></li>
-    </ul>
-  </div>
+<div class="cursor" id="cursor"></div>
+
+<!-- HUD Navigation -->
+<nav class="hud">
+  <a href="#hero">Home</a>
+  <a href="#games">Games</a>
+  <a href="#dev">Dev Blog</a>
 </nav>
 
-<!-- Hero -->
-<section id="hero">
-  <video autoplay muted loop playsinline>
-    <!-- Replace with your own video -->
-    <source src="hero-video.mp4" type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
-  <div class="container content">
-    <h1>Think Fast, Play Faster</h1>
-    <p class="subheading">Fast-paced mobile puzzles designed to sharpen your mind</p>
-    <div class="btn-group">
-      <a href="https://play.google.com/store/apps/details?id=com.tikva.game" target="_blank" rel="noopener" class="btn">Download on Google Play</a>
-      <a href="#newsletter" class="btn">Join Newsletter</a>
-    </div>
+<!-- Hero Section -->
+<div class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-layer layer1"><img src="screen1.png" alt="Character1"></div>
+  <div class="hero-layer layer2"><img src="screen2.png" alt="Character2"></div>
+  <div class="hero-layer layer3"><img src="screen3.png" alt="Character3"></div>
+
+  <div class="hero-content">
+    <h1>Tikva Games</h1>
+    <p>Play. Compete. Win in a neon world.</p>
+    <a href="#" class="btn">Google Play</a>
+    <a href="#" class="btn">LinkedIn</a>
+  </div>
+</div>
+
+<!-- Games Section -->
+<section id="games">
+  <h2>Our Games</h2>
+  <div class="games-list">
+    <div class="game-card">⚡ Quick Puzzle</div>
+    <div class="game-card">🎯 Skill Arena</div>
+    <div class="game-card">💰 Reward Chase</div>
+    <div class="game-card">🌀 Spin Challenge</div>
   </div>
 </section>
 
-<!-- Awards -->
-<section id="awards" aria-label="Awards and Recognition">
-  <h2>Awards & Recognition</h2>
-  <div class="award-logos" aria-live="polite">
-    <img src="award1.png" alt="Best Mobile Game 2025" title="Best Mobile Game 2025" />
-    <img src="award2.png" alt="Innovative Gameplay Award" title="Innovative Gameplay Award" />
-    <img src="award3.png" alt="Player's Choice 2024" title="Player's Choice 2024" />
+<!-- Dev Blog Section -->
+<section id="dev">
+  <h2>Dev Blog</h2>
+  <div class="terminal" id="terminal">
+    <p id="terminal-text"></p>
   </div>
 </section>
 
-<!-- Features -->
-<section id="features" aria-label="Game Features">
-  <div class="container cards">
-    <article class="card" tabindex="0">
-      <h3>🎯 Skill Based</h3>
-      <p>Win by sharpening your quick thinking and puzzle solving skills.</p>
-    </article>
-    <article class="card" tabindex="0">
-      <h3>💰 Real Rewards</h3>
-      <p>Earn exciting rewards for your achievements and progress.</p>
-    </article>
-    <article class="card" tabindex="0">
-      <h3>⚡ Fast Rounds</h3>
-      <p>Enjoy quick, thrilling game rounds anytime, anywhere.</p>
-    </article>
-  </div>
-</section>
+<script>
+// Cursor
+const cursor = document.getElementById("cursor");
+document.addEventListener("mousemove", e => {
+  cursor.style.left = e.clientX + "px";
+  cursor.style.top = e.clientY + "px";
+});
 
-<!-- Screenshots -->
-<section id="screenshots" aria-label="Game Screenshots">
-  <h2>Screenshots</h2>
-  <div class="slider" role="list">
-    <img src="screen1.png" alt="Tikva Game Screenshot 1" role="listitem" />
-    <img src="screen2.png" alt="Tikva Game Screenshot 2" role="listitem" />
-    <img src="screen3.png" alt="Tikva Game Screenshot 3" role="listitem" />
-  </div>
-</section>
+// Parallax Hero
+const layer1 = document.querySelector(".layer1 img");
+const layer2 = document.querySelector(".layer2 img");
+const layer3 = document.querySelector(".layer3 img");
+document.addEventListener("mousemove", e => {
+  let x = (window.innerWidth/2 - e.clientX)/50;
+  let y = (window.innerHeight/2 - e.clientY)/50;
+  layer1.style.transform = `translate(${x*3}px, ${y*3}px)`;
+  layer2.style.transform = `translate(${x*5}px, ${y*5}px)`;
+  layer3.style.transform = `translate(${x*2}px, ${y*2}px)`;
+});
 
-<!-- About Us -->
-<section id="about" aria-label="About Tikva">
-  <h2>About Us</h2>
-  <p>
-    Tikva is an innovative game development company focused on creating
-    fast-paced mobile puzzles that challenge and engage players worldwide.
-    Our mission is to combine thrilling gameplay with rewarding experiences,
-    backed by a dedicated team passionate about gaming and technology.
-  </p>
-</section>
+// Scroll animations
+const sections = document.querySelectorAll("section");
+window.addEventListener("scroll", ()=>{
+  sections.forEach(sec=>{
+    if(sec.getBoundingClientRect().top < window.innerHeight-100){
+      sec.classList.add("active");
+    }
+  });
+});
 
-<!-- Newsletter Signup (optional placeholder) -->
-<section id="newsletter" aria-label="Newsletter Signup" style="background:#eee; padding:3rem 20px; text-align:center;">
-  <h2>Stay Updated</h2>
-  <p>Sign up for our newsletter to get the latest news and exclusive rewards!</p>
-  <form onsubmit="event.preventDefault(); alert('Thanks for signing up!');" style="margin-top:1rem;">
-    <input type="email" placeholder="Your email address" required
-      style="padding:0.8rem 1rem; width:280px; max-width:90%; border:1.5px solid #6C5CE7; border-radius:30px; font-size:1rem;"/>
-    <button type="submit" class="btn" style="margin-left:1rem; padding:0.85rem 2rem;">Subscribe</button>
-  </form>
-</section>
-
-<!-- Footer -->
-<footer>
-  &copy; 2026 Tikva Games. All rights reserved.
-</footer>
+// Terminal typing animation
+const terminalText = "Initializing Tikva Games Dev Log...\nMission briefing: Deploy interactive web experience.\nUpdating HUD interface...\n";
+let i = 0;
+function typeTerminal() {
+  if(i < terminalText.length){
+    document.getElementById("terminal-text").innerHTML += terminalText.charAt(i) === "\n" ? "<br>" : terminalText.charAt(i);
+    i++;
+    setTimeout(typeTerminal, 40);
+  }
+}
+typeTerminal();
+</script>
 
 </body>
 </html>
