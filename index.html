@@ -1,203 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Tikva Games - Play. Compete. Win.</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tikva Games - Play. Compete. Win</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  /* Reset */
-  *, *::before, *::after {
-    margin: 0; padding: 0; box-sizing: border-box;
+  /* Reset & basic styles */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Roboto', sans-serif; background: #0b1120; color: #fff; scroll-behavior: smooth; }
+  a { text-decoration: none; color: inherit; }
+  img { max-width: 100%; display: block; }
+
+  /* Navigation */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 15px 50px; background: rgba(11,17,32,0.85);
+    z-index: 1000;
   }
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #0b1120, #1f2a44);
-    color: #eee;
-    line-height: 1.6;
-    overflow-x: hidden;
+  nav .logo { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; color: #22c55e; }
+  nav ul { list-style: none; display: flex; gap: 25px; }
+  nav ul li a { font-weight: 500; padding: 6px 10px; transition: 0.3s; }
+  nav ul li a:hover { color: #22c55e; }
+
+  /* Hero slider */
+  .hero {
+    height: 90vh;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
   }
-  header {
-    padding: 60px 20px 40px;
-    text-align: center;
-    background: linear-gradient(90deg, #22c55e, #16a34a);
-    color: #000;
-    box-shadow: 0 6px 12px #16a34a99;
-    position: relative;
-  }
-  header img {
-    width: 130px;
-    animation: float 5s ease-in-out infinite;
-    margin-bottom: 15px;
-  }
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
-  }
-  header h1 {
-    font-size: 3.5rem;
-    font-weight: 900;
-    letter-spacing: 3px;
-    text-shadow: 0 0 12px #0f813e;
-  }
-  header p {
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin-top: 8px;
-    color: #e0f2fe;
-    text-shadow: 0 0 6px #0f813eaa;
-  }
-  .btn-primary {
-    margin-top: 25px;
-    background: #22c55e;
-    color: #fff;
-    padding: 16px 45px;
-    border-radius: 30px;
-    font-weight: 700;
-    font-size: 1.2rem;
-    cursor: pointer;
-    text-decoration: none;
-    box-shadow: 0 5px 15px #22c55eaa;
-    transition: all 0.3s ease;
-    display: inline-block;
-  }
-  .btn-primary:hover {
-    background: #16a34a;
-    box-shadow: 0 8px 20px #16a34aaa;
-    transform: scale(1.05);
-  }
-  main {
-    padding: 60px 20px;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-  section.features {
-    display: flex;
-    justify-content: space-around;
-    gap: 30px;
-    flex-wrap: wrap;
-    margin-bottom: 80px;
-  }
-  .feature-card {
-    background: #162a44;
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 0 20px #22c55e44;
-    width: 300px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  .feature-card:hover {
-    transform: translateY(-15px);
-    box-shadow: 0 12px 30px #22c55eee;
-  }
-  .feature-card h3 {
-    color: #22c55e;
-    font-size: 1.6rem;
-    margin-bottom: 15px;
-  }
-  .feature-card p {
-    font-size: 1.1rem;
-    color: #cbd5f5;
-  }
-  section.screenshots {
-    margin-bottom: 80px;
-  }
-  section.screenshots h2 {
-    color: #22c55e;
-    font-size: 2.5rem;
-    margin-bottom: 35px;
-    text-align: center;
-    text-shadow: 0 0 8px #22c55e99;
-  }
-  .screenshots-container {
-    display: flex;
-    justify-content: center;
-    gap: 25px;
-    flex-wrap: wrap;
-  }
-  .screenshots-container img {
-    width: 260px;
-    border-radius: 20px;
-    box-shadow: 0 0 15px #22c55e55;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    filter: drop-shadow(0 0 5px #22c55eaa);
-  }
-  .screenshots-container img:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 30px #22c55eee;
-  }
-  section.about {
-    max-width: 750px;
-    margin: 0 auto 100px;
-    font-size: 1.2rem;
-    color: #cbd5f5;
-    line-height: 1.8;
-    text-align: center;
-  }
-  footer {
-    padding: 30px 0;
-    text-align: center;
-    font-size: 0.9rem;
-    color: #94a3b8;
-    background: #121c2f;
-  }
+  .slides { display: flex; transition: transform 1s ease-in-out; }
+  .slide { min-width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; position: relative; }
+  .slide img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.5); }
+  .slide-content { position: absolute; text-align: center; color: #fff; }
+  .slide-content h1 { font-family: 'Orbitron', sans-serif; font-size: 3rem; margin-bottom: 10px; color: #22c55e; }
+  .slide-content p { font-size: 1.2rem; max-width: 600px; margin: 0 auto; }
+
+  /* Sections */
+  section { padding: 80px 50px; max-width: 1200px; margin: 0 auto; }
+  section h2 { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; color: #22c55e; margin-bottom: 40px; text-align: center; }
+
+  /* Features */
+  .features { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; }
+  .feature-card { background: #162a44; padding: 25px; border-radius: 15px; width: 300px; box-shadow: 0 0 15px #22c55e55; transition: transform 0.3s; }
+  .feature-card:hover { transform: translateY(-10px); box-shadow: 0 0 25px #22c55eee; }
+  .feature-card h3 { color: #22c55e; margin-bottom: 12px; font-size: 1.5rem; }
+  .feature-card p { font-size: 1rem; color: #cbd5f5; }
+
+  /* Screenshots */
+  .screenshots-container { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+  .screenshots-container img { width: 250px; border-radius: 15px; box-shadow: 0 0 20px #22c55e55; transition: transform 0.3s; cursor: pointer; }
+  .screenshots-container img:hover { transform: scale(1.05); box-shadow: 0 0 30px #22c55eee; }
+
+  /* Footer */
+  footer { text-align: center; padding: 40px; background: #121c2f; color: #94a3b8; }
+
   @media(max-width: 768px) {
-    section.features {
-      flex-direction: column;
-      align-items: center;
-    }
+    nav { padding: 15px 20px; }
+    .features { flex-direction: column; align-items: center; }
+    .slide-content h1 { font-size: 2rem; }
+    .slide-content p { font-size: 1rem; }
   }
 </style>
 </head>
 <body>
 
-<header>
-  <img src="logo.png" alt="Tikva Games Logo" />
-  <h1>Tikva Games</h1>
-  <p>Play. Compete. Win real rewards.</p>
-  <a href="#" class="btn-primary">Start Playing</a>
-</header>
+<nav>
+  <div class="logo">Tikva Games</div>
+  <ul>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#screenshots">Screenshots</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+</nav>
 
-<main>
+<div class="hero">
+  <div class="slides">
+    <div class="slide">
+      <img src="slide1.jpg" alt="Slide 1">
+      <div class="slide-content">
+        <h1>Epic Mobile Gaming</h1>
+        <p>Play. Compete. Win real rewards with Tikva Games.</p>
+      </div>
+    </div>
+    <div class="slide">
+      <img src="slide2.jpg" alt="Slide 2">
+      <div class="slide-content">
+        <h1>Challenge Your Skills</h1>
+        <p>Fast-paced, fun, and rewarding gameplay.</p>
+      </div>
+    </div>
+    <div class="slide">
+      <img src="slide3.jpg" alt="Slide 3">
+      <div class="slide-content">
+        <h1>Join the Community</h1>
+        <p>Connect with gamers worldwide and earn rewards.</p>
+      </div>
+    </div>
+  </div>
+</div>
 
-  <section class="features" aria-label="Features">
-    <div class="feature-card" tabindex="0">
+<section id="features">
+  <h2>Our Features</h2>
+  <div class="features">
+    <div class="feature-card">
       <h3>🎯 Skill Based</h3>
-      <p>Win with your skills, not luck.</p>
+      <p>Win using your talent and strategy.</p>
     </div>
-    <div class="feature-card" tabindex="0">
+    <div class="feature-card">
       <h3>💰 Real Rewards</h3>
-      <p>Earn rewards while playing.</p>
+      <p>Earn prizes as you play and climb the leaderboard.</p>
     </div>
-    <div class="feature-card" tabindex="0">
+    <div class="feature-card">
       <h3>⚡ Fast & Fun</h3>
-      <p>Quick games anytime, anywhere.</p>
+      <p>Quick games, endless entertainment.</p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="screenshots" aria-label="Game Screenshots">
-    <h2>Game Screenshots</h2>
-    <div class="screenshots-container">
-      <img src="screen1.png" alt="Game Screenshot 1" />
-      <img src="screen2.png" alt="Game Screenshot 2" />
-      <img src="screen3.png" alt="Game Screenshot 3" />
-    </div>
-  </section>
+<section id="screenshots">
+  <h2>Game Screenshots</h2>
+  <div class="screenshots-container">
+    <img src="screen1.png" alt="Game Screenshot 1">
+    <img src="screen2.png" alt="Game Screenshot 2">
+    <img src="screen3.png" alt="Game Screenshot 3">
+  </div>
+</section>
 
-  <section class="about" aria-label="About Tikva Games">
-    <h2>About Us</h2>
-    <p>
-      Tikva Games is a cutting-edge mobile gaming platform focused on delivering
-      fun, competitive gameplay with real-world rewards. We aim to revolutionize
-      how gamers play and earn.
-    </p>
-  </section>
-
-</main>
+<section id="about">
+  <h2>About Tikva Games</h2>
+  <p style="text-align:center; max-width:700px; margin:auto;">
+    Tikva Games is a cutting-edge mobile gaming platform delivering fast, competitive, and rewarding gameplay. We aim to create unforgettable experiences for gamers worldwide.
+  </p>
+</section>
 
 <footer>
   &copy; 2026 Tikva Games. All rights reserved.
 </footer>
+
+<script>
+  // Simple slider functionality
+  const slides = document.querySelector('.slides');
+  const totalSlides = slides.children.length;
+  let index = 0;
+
+  setInterval(() => {
+    index = (index + 1) % totalSlides;
+    slides.style.transform = `translateX(-${index * 100}%)`;
+  }, 5000); // Change slide every 5 seconds
+</script>
 
 </body>
 </html>
