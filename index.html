@@ -1,138 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tikva Games | Fun & Rewards</title>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-blue: #37b7ff;
-            --accent-yellow: #ffcc00;
-            --soft-white: #f8f9fa;
-            --text-dark: #2d3436;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tikva Games | AAA Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body { 
-            font-family: 'Outfit', sans-serif; 
-            background-color: var(--soft-white); 
-            color: var(--text-dark);
-            overflow-x: hidden;
-        }
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Outfit',sans-serif;background:#121212;color:#fff;overflow-x:hidden}
 
-        h1, h2, h3 { font-family: 'Fredoka', sans-serif; }
+/* NAV */
+nav{display:flex;justify-content:space-between;align-items:center;padding:20px 5%;background:#121212cc;backdrop-filter:blur(10px);position:fixed;width:100%;z-index:100}
+nav img{height:50px}
+nav a{color:#00D4FF;text-decoration:none;font-weight:600}
 
-        /* Navigation */
-        nav {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 20px 5%; background: #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            position: sticky; top: 0; z-index: 100;
-        }
-        .nav-logo { height: 60px; }
+/* HERO */
+.hero{height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;width:100%;height:100%;background:radial-gradient(circle,#00D4FF22,transparent 70%);animation:pulse 4s infinite}
+@keyframes pulse{0%,100%{opacity:.2}50%{opacity:.5}}
+.hero-content{z-index:2}
+.hero h1{font-family:'Orbitron';font-size:4rem;color:#00D4FF;text-shadow:0 0 30px #00D4FF}
+.hero p{margin-top:15px;color:#aaa;font-size:1.3rem}
 
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #6c5ce7 0%, #37b7ff 100%);
-            padding: 80px 5%; display: flex; align-items: center; justify-content: center;
-            text-align: center; min-height: 80vh; color: white; position: relative;
-            overflow: hidden;
-        }
-        .hero-banner {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover; opacity: 0.3; z-index: 1;
-        }
-        .hero-content { position: relative; z-index: 2; max-width: 800px; }
-        .hero-content img.main-logo { width: 300px; margin-bottom: 20px; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2)); }
-        .hero-content h1 { font-size: 3.5rem; margin-bottom: 20px; line-height: 1.1; }
-        .hero-content p { font-size: 1.5rem; opacity: 0.9; margin-bottom: 40px; }
+.btn{margin-top:30px;padding:15px 40px;border-radius:50px;background:#00D4FF;color:#000;font-weight:700;text-decoration:none;box-shadow:0 0 20px #00D4FF;transition:.3s}
+.btn:hover{transform:scale(1.1);box-shadow:0 0 40px #00D4FF}
 
-        /* Buttons */
-        .btn-play {
-            background: #ff7675; color: white; padding: 18px 45px;
-            border-radius: 50px; text-decoration: none; font-weight: 700;
-            font-size: 1.2rem; box-shadow: 0 10px 25px rgba(255, 118, 117, 0.4);
-            transition: 0.3s; display: inline-block;
-        }
-        .btn-play:hover { transform: translateY(-5px); background: #ff5252; }
+/* SECTION */
+section{padding:80px 5%;max-width:1200px;margin:auto;text-align:center}
+h2{font-family:'Orbitron';color:#00D4FF;margin-bottom:40px}
 
-        /* Product Showcase */
-        .showcase { padding: 80px 5%; text-align: center; }
-        .section-title { font-size: 2.5rem; color: #6c5ce7; margin-bottom: 50px; }
-        
-        .game-card {
-            background: white; border-radius: 30px; overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08); display: flex;
-            flex-direction: column; align-items: center; padding: 40px;
-            max-width: 400px; margin: 0 auto; transition: 0.3s;
-        }
-        .game-card:hover { transform: scale(1.02); }
-        .game-icon { width: 180px; border-radius: 40px; margin-bottom: 25px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        .game-card h3 { font-size: 1.8rem; margin-bottom: 15px; }
-        
-        /* Features Grid */
-        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 60px; }
-        .feat-item { padding: 30px; background: #f0f7ff; border-radius: 20px; }
-        .feat-item h4 { color: var(--primary-blue); margin-bottom: 10px; font-size: 1.3rem; }
+/* GAME CARD */
+.card{background:rgba(255,255,255,0.05);backdrop-filter:blur(10px);border-radius:20px;padding:30px;box-shadow:0 0 30px #00D4FF22;transition:.3s}
+.card:hover{transform:translateY(-10px)}
+.card img{width:180px;border-radius:20px;margin-bottom:20px}
 
-        footer { background: #2d3436; color: white; padding: 50px 5%; text-align: center; margin-top: 50px; }
+/* FEATURES */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.box{background:#1a1a1a;padding:25px;border-radius:15px}
 
-        @media (max-width: 768px) {
-            .hero-content h1 { font-size: 2.5rem; }
-        }
-    </style>
+/* STATS */
+.stats{display:flex;justify-content:space-around;flex-wrap:wrap;margin-top:40px}
+.stats div{margin:10px;font-size:1.5rem;color:#00D4FF}
+
+/* FOOTER */
+footer{text-align:center;padding:40px;background:#111;color:#777}
+
+/* MOBILE */
+.mobile-btn{position:fixed;bottom:0;width:100%;background:#00D4FF;color:#000;text-align:center;padding:15px;font-weight:700}
+
+</style>
 </head>
 <body>
 
-    <nav>
-        <img src="logo.png" alt="Tikva Games" class="nav-logo">
-        <div>
-            <a href="https://linkedin.com/company/tikva-games" style="text-decoration:none; color:#6c5ce7; font-weight:bold;">LinkedIn</a>
-        </div>
-    </nav>
+<nav>
+<img src="logo.png">
+<a href="#">LinkedIn</a>
+</nav>
 
-    <section class="hero">
-        <img src="slide.jpg.jpg" alt="Background" class="hero-banner">
-        
-        <div class="hero-content">
-            <img src="logo.png" alt="Tikva Games" class="main-logo">
-            <h1>Think Fast. Play Smart.</h1>
-            <p>Experience the next generation of skill-based gaming rewards.</p>
-            <a href="https://play.google.com/store/apps/details?id=com.tikvagames" class="btn-play">Download on Google Play</a>
-        </div>
-    </section>
+<section class="hero">
+<div class="hero-content">
+<h1>We Build Worlds.</h1>
+<p>Master the Game. Earn the Glory.</p>
+<a href="#" class="btn">Download Now</a>
+</div>
+</section>
 
-    <main class="showcase">
-        <h2 class="section-title">Our Featured Game</h2>
-        
-        <div class="game-card">
-            <img src="screen3.png" alt="Game Icon" class="game-icon">
-            <h3>Think Fast!</h3>
-            <p>The ultimate puzzle challenge that tests your reflexes and rewards your intelligence. Pure skill, no luck.</p>
-            <div style="margin-top:20px; color:#37b7ff; font-weight:bold;">Coming Soon to iOS</div>
-        </div>
+<section>
+<h2>Featured Game</h2>
+<div class="card">
+<img src="game-icon.png">
+<h3>Think Fast!</h3>
+<p>High-speed brain challenge where skill wins rewards.</p>
+<p>⭐ 4.8 Rating • 10K+ Players</p>
+<a class="btn">Watch Trailer</a>
+</div>
+</section>
 
-        <div class="features">
-            <div class="feat-item">
-                <h4>🧩 Brain Training</h4>
-                <p>Sharpen your mind with fast-paced logic puzzles.</p>
-            </div>
-            <div class="feat-item">
-                <h4>🏆 Real Rewards</h4>
-                <p>Climb the leaderboard and win exclusive prizes.</p>
-            </div>
-            <div class="feat-item">
-                <h4>🌍 Global Arena</h4>
-                <p>Compete with players from all over the world.</p>
-            </div>
-        </div>
-    </main>
+<section>
+<h2>Why Tikva</h2>
+<div class="grid">
+<div class="box">🧠 Skill Based Gameplay</div>
+<div class="box">💰 Real Rewards</div>
+<div class="box">🌍 Global Competition</div>
+</div>
+</section>
 
-    <footer>
-        <p>&copy; 2026 Tikva Games Studio. All Rights Reserved.</p>
-        <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.6;">Based in Dindigul, Tamil Nadu</p>
-    </footer>
+<section>
+<h2>Our Impact</h2>
+<div class="stats">
+<div>10K+ Players</div>
+<div>₹1L+ Rewards</div>
+<div>Top Ranked</div>
+</div>
+</section>
+
+<footer>
+<p>Powered by Tikva Engine</p>
+<p>© 2026 Tikva Games</p>
+</footer>
+
+<div class="mobile-btn">Download App</div>
 
 </body>
 </html>
