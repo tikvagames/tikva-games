@@ -3,262 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tikva Games | Skill. Compete. Win.</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
-
+    <title>Tikva Games | Fun & Rewards</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --neon-blue: #00f2ff;
-            --neon-purple: #bc13fe;
-            --bg-dark: #05050a;
-            --glass: rgba(255, 255, 255, 0.05);
+            --primary-blue: #37b7ff;
+            --accent-yellow: #ffcc00;
+            --soft-white: #f8f9fa;
+            --text-dark: #2d3436;
         }
 
-        /* Reset & Base */
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background: var(--bg-dark); 
-            color: #fff; 
-            overflow-x: hidden; 
-            line-height: 1.6;
-        }
-
-        /* Custom Cursor */
-        #cursor {
-            position: fixed; width: 20px; height: 20px; border: 2px solid var(--neon-blue);
-            border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%);
-            z-index: 10000; transition: transform 0.15s ease-out, background 0.3s;
-            box-shadow: 0 0 15px var(--neon-blue);
-        }
-
-        /* Particle Canvas */
-        #bg-canvas {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1; opacity: 0.5;
-        }
-
-        /* Header / Hero */
-        header {
-            position: relative; height: 100vh; display: flex; 
-            justify-content: center; align-items: center; overflow: hidden;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        .hero-video {
-            position: absolute; width: 100%; height: 100%; object-fit: cover;
-            filter: brightness(0.3) contrast(1.2); z-index: -1;
+        body { 
+            font-family: 'Outfit', sans-serif; 
+            background-color: var(--soft-white); 
+            color: var(--text-dark);
+            overflow-x: hidden;
         }
 
-        .hero-content {
-            z-index: 2; text-align: center; padding: 0 20px;
-            animation: fadeIn 1.5s ease-out;
-        }
+        h1, h2, h3 { font-family: 'Fredoka', sans-serif; }
 
-        .hero-content h1 {
-            font-family: 'Orbitron'; font-size: clamp(3rem, 8vw, 6rem);
-            font-weight: 900; letter-spacing: 5px;
-            background: linear-gradient(to bottom, #fff, var(--neon-blue));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 20px rgba(0, 242, 255, 0.5));
+        /* Navigation */
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 5%; background: #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            position: sticky; top: 0; z-index: 100;
         }
+        .nav-logo { height: 60px; }
 
-        .hero-content p {
-            margin: 20px 0 40px; font-size: 1.4rem; color: #a1a1aa;
-            font-family: 'Orbitron'; letter-spacing: 2px;
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #6c5ce7 0%, #37b7ff 100%);
+            padding: 80px 5%; display: flex; align-items: center; justify-content: center;
+            text-align: center; min-height: 80vh; color: white; position: relative;
+            overflow: hidden;
         }
+        .hero-banner {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; opacity: 0.3; z-index: 1;
+        }
+        .hero-content { position: relative; z-index: 2; max-width: 800px; }
+        .hero-content img.main-logo { width: 300px; margin-bottom: 20px; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2)); }
+        .hero-content h1 { font-size: 3.5rem; margin-bottom: 20px; line-height: 1.1; }
+        .hero-content p { font-size: 1.5rem; opacity: 0.9; margin-bottom: 40px; }
 
         /* Buttons */
-        .btn-group { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
-        .btn {
-            padding: 16px 40px; border-radius: 4px; font-family: 'Orbitron';
-            text-decoration: none; font-weight: bold; text-transform: uppercase;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative; overflow: hidden;
+        .btn-play {
+            background: #ff7675; color: white; padding: 18px 45px;
+            border-radius: 50px; text-decoration: none; font-weight: 700;
+            font-size: 1.2rem; box-shadow: 0 10px 25px rgba(255, 118, 117, 0.4);
+            transition: 0.3s; display: inline-block;
         }
-        .btn-main {
-            background: var(--neon-blue); color: #000;
-            box-shadow: 0 0 20px rgba(0, 242, 255, 0.4);
-        }
-        .btn-main:hover {
-            transform: translateY(-5px); box-shadow: 0 0 40px var(--neon-blue);
-            background: #fff;
-        }
+        .btn-play:hover { transform: translateY(-5px); background: #ff5252; }
 
-        /* Grid & Cards */
-        main { max-width: 1300px; margin: 0 auto; padding: 100px 20px; }
-        .section-title {
-            font-family: 'Orbitron'; font-size: 2.5rem; text-align: center;
-            margin-bottom: 60px; color: var(--neon-blue);
-        }
-
-        .features-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px; margin-bottom: 120px;
-        }
-
-        .card {
-            background: var(--glass); border: 1px solid rgba(255,255,255,0.1);
-            padding: 40px; border-radius: 15px; backdrop-filter: blur(10px);
-            transition: 0.3s; position: relative;
-        }
-        .card:hover {
-            border-color: var(--neon-blue); background: rgba(0, 242, 255, 0.05);
-            transform: translateY(-10px);
-        }
-        .card h3 { font-family: 'Orbitron'; margin-bottom: 15px; color: var(--neon-blue); }
-
-        /* Screenshots */
-        .ss-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-        .ss-grid img {
-            width: 100%; border-radius: 10px; opacity: 0.7;
-            transition: 0.5s; filter: grayscale(50%);
-        }
-        .ss-grid img:hover {
-            opacity: 1; filter: grayscale(0%); transform: scale(1.05);
-            box-shadow: 0 0 30px var(--neon-blue);
-        }
-
-        footer {
-            text-align: center; padding: 60px; border-top: 1px solid var(--glass);
-            font-family: 'Orbitron'; font-size: 0.9rem; color: #555;
-        }
-
-        /* Animations */
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        /* Product Showcase */
+        .showcase { padding: 80px 5%; text-align: center; }
+        .section-title { font-size: 2.5rem; color: #6c5ce7; margin-bottom: 50px; }
         
-        .reveal { opacity: 0; transform: translateY(50px); transition: 1s ease-out; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+        .game-card {
+            background: white; border-radius: 30px; overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08); display: flex;
+            flex-direction: column; align-items: center; padding: 40px;
+            max-width: 400px; margin: 0 auto; transition: 0.3s;
+        }
+        .game-card:hover { transform: scale(1.02); }
+        .game-icon { width: 180px; border-radius: 40px; margin-bottom: 25px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .game-card h3 { font-size: 1.8rem; margin-bottom: 15px; }
+        
+        /* Features Grid */
+        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 60px; }
+        .feat-item { padding: 30px; background: #f0f7ff; border-radius: 20px; }
+        .feat-item h4 { color: var(--primary-blue); margin-bottom: 10px; font-size: 1.3rem; }
+
+        footer { background: #2d3436; color: white; padding: 50px 5%; text-align: center; margin-top: 50px; }
+
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.5rem; }
+        }
     </style>
 </head>
 <body>
 
-    <div id="cursor"></div>
-    <canvas id="bg-canvas"></canvas>
+    <nav>
+        <img src="logo.png" alt="Tikva Games" class="nav-logo">
+        <div>
+            <a href="https://linkedin.com/company/tikva-games" style="text-decoration:none; color:#6c5ce7; font-weight:bold;">LinkedIn</a>
+        </div>
+    </nav>
 
-    <header>
-        <video class="hero-video" autoplay muted loop playsinline>
-            <source src="https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-a-video-game-concept-25134-large.mp4" type="video/mp4">
-        </video>
-
+    <section class="hero">
+        <img src="slide.jpg.jpg" alt="Background" class="hero-banner">
+        
         <div class="hero-content">
-            <h1>TIKVA GAMES</h1>
-            <p>ELEVATING INDIE GAMING</p>
-            <div class="btn-group">
-                <a href="#" class="btn btn-main">Download App</a>
-                <a href="#" class="btn" style="border:1px solid #fff; color:#fff;">Join Community</a>
+            <img src="logo.png" alt="Tikva Games" class="main-logo">
+            <h1>Think Fast. Play Smart.</h1>
+            <p>Experience the next generation of skill-based gaming rewards.</p>
+            <a href="https://play.google.com/store/apps/details?id=com.tikvagames" class="btn-play">Download on Google Play</a>
+        </div>
+    </section>
+
+    <main class="showcase">
+        <h2 class="section-title">Our Featured Game</h2>
+        
+        <div class="game-card">
+            <img src="screen3.png" alt="Game Icon" class="game-icon">
+            <h3>Think Fast!</h3>
+            <p>The ultimate puzzle challenge that tests your reflexes and rewards your intelligence. Pure skill, no luck.</p>
+            <div style="margin-top:20px; color:#37b7ff; font-weight:bold;">Coming Soon to iOS</div>
+        </div>
+
+        <div class="features">
+            <div class="feat-item">
+                <h4>🧩 Brain Training</h4>
+                <p>Sharpen your mind with fast-paced logic puzzles.</p>
+            </div>
+            <div class="feat-item">
+                <h4>🏆 Real Rewards</h4>
+                <p>Climb the leaderboard and win exclusive prizes.</p>
+            </div>
+            <div class="feat-item">
+                <h4>🌍 Global Arena</h4>
+                <p>Compete with players from all over the world.</p>
             </div>
         </div>
-    </header>
-
-    <main>
-        <section class="reveal">
-            <h2 class="section-title">The Tikva Experience</h2>
-            <div class="features-grid">
-                <div class="card">
-                    <h3>01. Skill Only</h3>
-                    <p>No pay-to-win. Our algorithms ensure that your victory is earned through pure mechanical skill and strategy.</p>
-                </div>
-                <div class="card">
-                    <h3>02. Ecosystem</h3>
-                    <p>Earn Tikva Credits redeemable across our entire library of games and partner platforms.</p>
-                </div>
-                <div class="card">
-                    <h3>03. Live Tournaments</h3>
-                    <p>Compete in daily global brackets. High stakes, high rewards, and real-time spectatorship.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="reveal">
-            <h2 class="section-title">Project Aether</h2>
-            <div class="ss-grid">
-                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800" alt="Gameplay 1">
-                <img src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?auto=format&fit=crop&w=800" alt="Gameplay 2">
-                <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=800" alt="Gameplay 3">
-            </div>
-        </section>
     </main>
 
     <footer>
-        &copy; 2026 TIKVA GAMES STUDIO. ALL RIGHTS RESERVED.
+        <p>&copy; 2026 Tikva Games Studio. All Rights Reserved.</p>
+        <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.6;">Based in Dindigul, Tamil Nadu</p>
     </footer>
 
-    <script>
-        // Custom Cursor Interaction
-        const cursor = document.getElementById('cursor');
-        document.addEventListener('mousemove', e => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-        });
-
-        document.querySelectorAll('a, .card').forEach(item => {
-            item.addEventListener('mouseenter', () => {
-                cursor.style.transform = 'translate(-50%, -50%) scale(2.5)';
-                cursor.style.background = 'rgba(0, 242, 255, 0.1)';
-            });
-            item.addEventListener('mouseleave', () => {
-                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-                cursor.style.background = 'transparent';
-            });
-        });
-
-        // Background Particles
-        const canvas = document.getElementById('bg-canvas');
-        const ctx = canvas.getContext('2d');
-        let dots = [];
-        
-        function resize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resize);
-        resize();
-
-        class Dot {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2;
-                this.speedX = (Math.random() - 0.5) * 0.5;
-                this.speedY = (Math.random() - 0.5) * 0.5;
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.x > canvas.width) this.x = 0;
-                if (this.x < 0) this.x = canvas.width;
-                if (this.y > canvas.height) this.y = 0;
-                if (this.y < 0) this.y = canvas.height;
-            }
-            draw() {
-                ctx.fillStyle = '#00f2ff';
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-
-        for(let i=0; i<100; i++) dots.push(new Dot());
-
-        function animate() {
-            ctx.clearRect(0,0,canvas.width, canvas.height);
-            dots.forEach(d => { d.update(); d.draw(); });
-            requestAnimationFrame(animate);
-        }
-        animate();
-
-        // Scroll Reveal
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('active');
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    </script>
 </body>
 </html>
