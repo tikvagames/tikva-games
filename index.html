@@ -3,51 +3,50 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tikva Games | AAA Studio</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+<title>Tikva Games | Premium Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Outfit',sans-serif;background:#121212;color:#fff;overflow-x:hidden}
+body{font-family:'Inter',sans-serif;background:#0f172a;color:#e2e8f0;overflow-x:hidden}
 
 /* NAV */
-nav{display:flex;justify-content:space-between;align-items:center;padding:20px 5%;background:#121212cc;backdrop-filter:blur(10px);position:fixed;width:100%;z-index:100}
+nav{display:flex;justify-content:space-between;align-items:center;padding:20px 5%;background:#0f172acc;backdrop-filter:blur(10px);position:fixed;width:100%;z-index:100}
 nav img{height:50px}
-nav a{color:#00D4FF;text-decoration:none;font-weight:600}
+nav a{color:#cbd5f5;text-decoration:none;font-weight:600}
 
 /* HERO */
-.hero{height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;width:100%;height:100%;background:radial-gradient(circle,#00D4FF22,transparent 70%);animation:pulse 4s infinite}
-@keyframes pulse{0%,100%{opacity:.2}50%{opacity:.5}}
-.hero-content{z-index:2}
-.hero h1{font-family:'Orbitron';font-size:4rem;color:#00D4FF;text-shadow:0 0 30px #00D4FF}
-.hero p{margin-top:15px;color:#aaa;font-size:1.3rem}
+.hero{height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative}
+.hero-content{z-index:2;max-width:800px}
+.hero h1{font-size:3.5rem;font-weight:700;color:#f8fafc}
+.hero p{margin-top:15px;color:#94a3b8;font-size:1.2rem}
 
-.btn{margin-top:30px;padding:15px 40px;border-radius:50px;background:#00D4FF;color:#000;font-weight:700;text-decoration:none;box-shadow:0 0 20px #00D4FF;transition:.3s}
-.btn:hover{transform:scale(1.1);box-shadow:0 0 40px #00D4FF}
+.btn{margin-top:30px;padding:14px 36px;border-radius:40px;background:#3b82f6;color:#fff;font-weight:600;text-decoration:none;transition:.3s}
+.btn:hover{background:#2563eb;transform:translateY(-2px)}
 
 /* SECTION */
-section{padding:80px 5%;max-width:1200px;margin:auto;text-align:center}
-h2{font-family:'Orbitron';color:#00D4FF;margin-bottom:40px}
+section{padding:80px 5%;max-width:1100px;margin:auto;text-align:center}
+h2{font-size:2.2rem;margin-bottom:40px;color:#f1f5f9}
 
 /* GAME CARD */
-.card{background:rgba(255,255,255,0.05);backdrop-filter:blur(10px);border-radius:20px;padding:30px;box-shadow:0 0 30px #00D4FF22;transition:.3s}
-.card:hover{transform:translateY(-10px)}
-.card img{width:180px;border-radius:20px;margin-bottom:20px}
+.card{background:#1e293b;border-radius:20px;padding:30px;box-shadow:0 10px 30px rgba(0,0,0,0.3);transition:.3s}
+.card:hover{transform:translateY(-8px)}
+.card img{width:160px;border-radius:20px;margin-bottom:20px}
+.card p{color:#94a3b8}
 
 /* FEATURES */
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
-.box{background:#1a1a1a;padding:25px;border-radius:15px}
+.box{background:#1e293b;padding:25px;border-radius:15px}
 
 /* STATS */
 .stats{display:flex;justify-content:space-around;flex-wrap:wrap;margin-top:40px}
-.stats div{margin:10px;font-size:1.5rem;color:#00D4FF}
+.stats div{margin:10px;font-size:1.4rem;color:#60a5fa}
 
 /* FOOTER */
-footer{text-align:center;padding:40px;background:#111;color:#777}
+footer{text-align:center;padding:40px;background:#020617;color:#64748b}
 
 /* MOBILE */
-.mobile-btn{position:fixed;bottom:0;width:100%;background:#00D4FF;color:#000;text-align:center;padding:15px;font-weight:700}
+.mobile-btn{position:fixed;bottom:0;width:100%;background:#3b82f6;color:#fff;text-align:center;padding:15px;font-weight:600}
 
 </style>
 </head>
@@ -60,8 +59,8 @@ footer{text-align:center;padding:40px;background:#111;color:#777}
 
 <section class="hero">
 <div class="hero-content">
-<h1>We Build Worlds.</h1>
-<p>Master the Game. Earn the Glory.</p>
+<h1>We Build Meaningful Games.</h1>
+<p>Crafting engaging experiences that reward skill and creativity.</p>
 <a href="#" class="btn">Download Now</a>
 </div>
 </section>
@@ -71,18 +70,18 @@ footer{text-align:center;padding:40px;background:#111;color:#777}
 <div class="card">
 <img src="game-icon.png">
 <h3>Think Fast!</h3>
-<p>High-speed brain challenge where skill wins rewards.</p>
-<p>⭐ 4.8 Rating • 10K+ Players</p>
-<a class="btn">Watch Trailer</a>
+<p>Fast-paced puzzle experience designed to challenge your mind.</p>
+<p style="margin-top:10px;font-weight:600">⭐ 4.8 Rating • 10K+ Players</p>
+<a class="btn" style="margin-top:15px;display:inline-block">Watch Trailer</a>
 </div>
 </section>
 
 <section>
 <h2>Why Tikva</h2>
 <div class="grid">
-<div class="box">🧠 Skill Based Gameplay</div>
-<div class="box">💰 Real Rewards</div>
-<div class="box">🌍 Global Competition</div>
+<div class="box">🧠 Skill-based gameplay focused on mastery</div>
+<div class="box">💰 Fair and rewarding competitive system</div>
+<div class="box">🌍 Global community of players</div>
 </div>
 </section>
 
