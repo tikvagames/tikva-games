@@ -4,73 +4,206 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tikva Games | Premium Studio</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;background:#0b1220;color:#e2e8f0;overflow-x:hidden}
+body{
+  font-family:'Inter',sans-serif;
+  background:#050816;
+  color:#e2e8f0;
+  overflow-x:hidden;
+}
+
+/* PARTICLES */
+#particles{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index:-1;
+}
 
 /* NAV */
-nav{display:flex;justify-content:space-between;align-items:center;padding:20px 5%;background:#0b1220cc;backdrop-filter:blur(12px);position:fixed;width:100%;z-index:100}
-nav img{height:50px}
-nav a{color:#cbd5f5;text-decoration:none;font-weight:600;margin-left:20px}
+nav{
+  display:flex;
+  justify-content:space-between;
+  padding:20px 5%;
+  position:fixed;
+  width:100%;
+  background:#050816cc;
+  backdrop-filter:blur(10px);
+  z-index:100;
+}
+nav a{
+  color:#cbd5f5;
+  margin-left:20px;
+  text-decoration:none;
+  font-weight:600;
+}
 
-/* PARALLAX HERO */
-.hero{height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;background:url('hero-bg.jpg') center/cover no-repeat;transform:translateZ(0);will-change:transform}
-.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,#0b1220aa,#0b1220)}
-.hero-content{position:relative;z-index:2;max-width:800px}
-.hero h1{font-size:3.5rem;font-weight:700}
-.hero p{margin-top:15px;color:#94a3b8;font-size:1.2rem}
+/* HERO */
+.hero{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  position:relative;
+}
+.hero-bg{
+  position:absolute;
+  inset:0;
+  background:url('hero-bg.jpg') center/cover no-repeat;
+  opacity:0.4;
+}
+.hero-content{
+  position:relative;
+  z-index:2;
+}
+.hero h1{
+  font-family:'Orbitron',sans-serif;
+  font-size:3rem;
+  text-shadow:0 0 25px #3b82f6;
+}
+.hero p{
+  margin-top:15px;
+  color:#94a3b8;
+}
 
-.btn{margin-top:30px;padding:14px 36px;border-radius:40px;background:#3b82f6;color:#fff;font-weight:600;text-decoration:none;transition:.3s}
-.btn:hover{background:#2563eb;transform:translateY(-3px)}
+/* BUTTON */
+.btn{
+  display:inline-block;
+  margin-top:25px;
+  padding:14px 35px;
+  border-radius:40px;
+  background:linear-gradient(45deg,#3b82f6,#9333ea);
+  color:#fff;
+  text-decoration:none;
+  box-shadow:0 0 20px #3b82f6;
+  transition:.3s;
+}
+.btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 0 35px #9333ea;
+}
 
 /* SECTION */
-section{padding:100px 5%;max-width:1100px;margin:auto;text-align:center}
-h2{font-size:2.3rem;margin-bottom:40px;color:#f1f5f9}
+section{
+  padding:100px 5%;
+  max-width:1100px;
+  margin:auto;
+  text-align:center;
+}
+h2{
+  font-size:2.2rem;
+  margin-bottom:40px;
+}
 
-/* CINEMATIC BLOCK */
-.cinematic{position:relative;height:400px;border-radius:20px;overflow:hidden;margin:60px 0}
-.cinematic img{width:100%;height:100%;object-fit:cover;filter:brightness(0.5)}
-.cinematic-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:2rem;font-weight:600}
+/* CARD */
+.card{
+  background:#0b1225;
+  padding:30px;
+  border-radius:20px;
+  transition:.4s;
+  position:relative;
+  overflow:hidden;
+}
+.card:hover{
+  transform:translateY(-10px);
+}
+.card::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg,transparent,#3b82f633,transparent);
+  opacity:0;
+  transition:.5s;
+}
+.card:hover::before{opacity:1}
 
-/* GAME CARD */
-.card{background:#111827;border-radius:20px;padding:30px;box-shadow:0 10px 30px rgba(0,0,0,0.4);transition:.3s}
-.card:hover{transform:translateY(-8px)}
-.card img{width:160px;border-radius:20px;margin-bottom:20px}
-.card p{color:#94a3b8}
-
-/* FEATURES */
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
-.box{background:#111827;padding:25px;border-radius:15px}
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+.box{
+  background:#0b1225;
+  padding:25px;
+  border-radius:15px;
+}
 
 /* TEAM */
-.team{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:30px}
-.member{background:#111827;padding:20px;border-radius:15px}
-.member img{width:80px;height:80px;border-radius:50%;margin-bottom:10px}
+.team{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:25px;
+}
+.member{
+  background:#0b1225;
+  padding:20px;
+  border-radius:15px;
+}
 
 /* ROADMAP */
-.roadmap{display:flex;flex-direction:column;gap:20px;text-align:left}
-.road{background:#111827;padding:20px;border-radius:12px}
+.road{
+  background:#0b1225;
+  padding:20px;
+  border-radius:12px;
+  margin-bottom:15px;
+}
 
 /* STATS */
-.stats{display:flex;justify-content:space-around;flex-wrap:wrap;margin-top:40px}
-.stats div{margin:10px;font-size:1.4rem;color:#60a5fa}
+.stats{
+  display:flex;
+  justify-content:space-around;
+  flex-wrap:wrap;
+}
+.stats div{
+  margin:10px;
+  color:#60a5fa;
+}
 
 /* FOOTER */
-footer{text-align:center;padding:40px;background:#020617;color:#64748b}
+footer{
+  text-align:center;
+  padding:40px;
+  background:#020617;
+}
+
+/* SCROLL ANIMATION */
+.fade{
+  opacity:0;
+  transform:translateY(40px);
+  transition:.6s;
+}
+.show{
+  opacity:1;
+  transform:translateY(0);
+}
 
 /* MOBILE */
-.mobile-btn{position:fixed;bottom:0;width:100%;background:#3b82f6;color:#fff;text-align:center;padding:15px;font-weight:600}
-
+.mobile-btn{
+  position:fixed;
+  bottom:0;
+  width:100%;
+  background:linear-gradient(90deg,#3b82f6,#9333ea);
+  padding:15px;
+  text-align:center;
+  font-weight:600;
+}
 </style>
 </head>
+
 <body>
 
+<canvas id="particles"></canvas>
+
 <nav>
-<img src="logo.png">
+<div>🎮 Tikva</div>
 <div>
 <a href="#game">Game</a>
 <a href="#team">Team</a>
@@ -79,59 +212,52 @@ footer{text-align:center;padding:40px;background:#020617;color:#64748b}
 </nav>
 
 <section class="hero">
+<div class="hero-bg"></div>
 <div class="hero-content">
-<h1>We Build Worlds That Players Live In.</h1>
-<p>Skill-driven experiences with real engagement and rewards.</p>
+<h1>ENTER THE NEXT GENERATION OF GAMING</h1>
+<p>Skill-based experiences. Real competition. Real rewards.</p>
 <a href="#" class="btn">Download Now</a>
 </div>
 </section>
 
-<section class="cinematic">
-<img src="cinematic.jpg">
-<div class="cinematic-text">Experience the Future of Skill Gaming</div>
-</section>
-
-<section id="game">
+<section id="game" class="fade">
 <h2>Featured Game</h2>
 <div class="card">
-<img src="game-icon.png">
 <h3>Think Fast!</h3>
-<p>Fast-paced puzzle experience designed to challenge your mind.</p>
-<p style="margin-top:10px;font-weight:600">⭐ 4.8 Rating • 10K+ Players</p>
-<a class="btn" style="margin-top:15px;display:inline-block">Watch Trailer</a>
+<p>Fast-paced puzzle game to test your brain speed.</p>
+<p>⭐ 4.8 Rating • 10K+ Players</p>
+<a class="btn">Watch Trailer</a>
 </div>
 </section>
 
-<section>
+<section class="fade">
 <h2>Why Tikva</h2>
 <div class="grid">
-<div class="box">🧠 Skill-based gameplay</div>
-<div class="box">💰 Real rewards system</div>
-<div class="box">🌍 Global competition</div>
+<div class="box">🧠 Skill-Based Gameplay</div>
+<div class="box">💰 Real Rewards</div>
+<div class="box">🌍 Global Competition</div>
 </div>
 </section>
 
-<section id="team">
+<section id="team" class="fade">
 <h2>Our Team</h2>
 <div class="team">
-<div class="member"><img src="team1.png"><h4>Founder</h4><p>Vision & Strategy</p></div>
-<div class="member"><img src="team2.png"><h4>Developer</h4><p>Game Systems</p></div>
-<div class="member"><img src="team3.png"><h4>Designer</h4><p>UI/UX</p></div>
+<div class="member">Founder</div>
+<div class="member">Developer</div>
+<div class="member">Designer</div>
 </div>
 </section>
 
-<section id="roadmap">
+<section id="roadmap" class="fade">
 <h2>Roadmap</h2>
-<div class="roadmap">
-<div class="road">Q1: Game Launch</div>
-<div class="road">Q2: Multiplayer Mode</div>
-<div class="road">Q3: Global Tournaments</div>
-<div class="road">Q4: New Game Releases</div>
-</div>
+<div class="road">Q1: Launch</div>
+<div class="road">Q2: Multiplayer</div>
+<div class="road">Q3: Tournaments</div>
+<div class="road">Q4: New Games</div>
 </section>
 
-<section>
-<h2>Our Impact</h2>
+<section class="fade">
+<h2>Impact</h2>
 <div class="stats">
 <div>10K+ Players</div>
 <div>₹1L+ Rewards</div>
@@ -140,18 +266,68 @@ footer{text-align:center;padding:40px;background:#020617;color:#64748b}
 </section>
 
 <footer>
-<p>Powered by Tikva Engine</p>
 <p>© 2026 Tikva Games</p>
 </footer>
 
 <div class="mobile-btn">Download App</div>
 
 <script>
-// Simple Parallax Effect
+// PARALLAX
 window.addEventListener('scroll',()=>{
-  const scrolled=window.scrollY;
-  document.querySelector('.hero::before');
+  document.querySelector('.hero-bg').style.transform =
+    `translateY(${window.scrollY * 0.4}px)`;
 });
+
+// SCROLL ANIMATION
+const faders = document.querySelectorAll('.fade');
+window.addEventListener('scroll',()=>{
+  faders.forEach(el=>{
+    if(el.getBoundingClientRect().top < window.innerHeight - 100){
+      el.classList.add('show');
+    }
+  });
+});
+
+// PARTICLES
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+for(let i=0;i<80;i++){
+  particles.push({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    r:Math.random()*2,
+    d:Math.random()*1
+  });
+}
+
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle="#3b82f6";
+  particles.forEach(p=>{
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fill();
+  });
+  update();
+}
+
+function update(){
+  particles.forEach(p=>{
+    p.y += p.d;
+    if(p.y > canvas.height){
+      p.y = 0;
+      p.x = Math.random()*canvas.width;
+    }
+  });
+}
+
+setInterval(draw,30);
 </script>
 
 </body>
