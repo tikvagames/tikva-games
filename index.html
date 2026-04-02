@@ -3,27 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tikva Games | Premium Studio</title>
+<title>Tikva Games</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
+
 body{
   font-family:'Inter',sans-serif;
   background:#050816;
   color:#e2e8f0;
-  overflow-x:hidden;
-}
-
-/* PARTICLES */
-#particles{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  z-index:-1;
 }
 
 /* NAV */
@@ -41,7 +31,6 @@ nav a{
   color:#cbd5f5;
   margin-left:20px;
   text-decoration:none;
-  font-weight:600;
 }
 
 /* HERO */
@@ -51,29 +40,17 @@ nav a{
   justify-content:center;
   align-items:center;
   text-align:center;
-  position:relative;
-}
-.hero-bg{
-  position:absolute;
-  inset:0;
-  background:url('hero-bg.jpg') center/cover no-repeat;
-  opacity:0.4;
-}
-.hero-content{
-  position:relative;
-  z-index:2;
+  background:linear-gradient(#050816aa,#050816aa), url('hero.jpg') center/cover;
 }
 .hero h1{
-  font-family:'Orbitron',sans-serif;
+  font-family:'Orbitron';
   font-size:3rem;
-  text-shadow:0 0 25px #3b82f6;
 }
 .hero p{
   margin-top:15px;
   color:#94a3b8;
 }
 
-/* BUTTON */
 .btn{
   display:inline-block;
   margin-top:25px;
@@ -82,12 +59,6 @@ nav a{
   background:linear-gradient(45deg,#3b82f6,#9333ea);
   color:#fff;
   text-decoration:none;
-  box-shadow:0 0 20px #3b82f6;
-  transition:.3s;
-}
-.btn:hover{
-  transform:translateY(-3px);
-  box-shadow:0 0 35px #9333ea;
 }
 
 /* SECTION */
@@ -97,32 +68,6 @@ section{
   margin:auto;
   text-align:center;
 }
-h2{
-  font-size:2.2rem;
-  margin-bottom:40px;
-}
-
-/* CARD */
-.card{
-  background:#0b1225;
-  padding:30px;
-  border-radius:20px;
-  transition:.4s;
-  position:relative;
-  overflow:hidden;
-}
-.card:hover{
-  transform:translateY(-10px);
-}
-.card::before{
-  content:'';
-  position:absolute;
-  inset:0;
-  background:linear-gradient(120deg,transparent,#3b82f633,transparent);
-  opacity:0;
-  transition:.5s;
-}
-.card:hover::before{opacity:1}
 
 /* GRID */
 .grid{
@@ -130,41 +75,18 @@ h2{
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
   gap:20px;
 }
-.box{
+
+/* CARD */
+.card{
   background:#0b1225;
   padding:25px;
+  border-radius:20px;
+}
+
+/* IMAGE */
+.game-img{
+  width:100%;
   border-radius:15px;
-}
-
-/* TEAM */
-.team{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:25px;
-}
-.member{
-  background:#0b1225;
-  padding:20px;
-  border-radius:15px;
-}
-
-/* ROADMAP */
-.road{
-  background:#0b1225;
-  padding:20px;
-  border-radius:12px;
-  margin-bottom:15px;
-}
-
-/* STATS */
-.stats{
-  display:flex;
-  justify-content:space-around;
-  flex-wrap:wrap;
-}
-.stats div{
-  margin:10px;
-  color:#60a5fa;
 }
 
 /* FOOTER */
@@ -173,162 +95,104 @@ footer{
   padding:40px;
   background:#020617;
 }
-
-/* SCROLL ANIMATION */
-.fade{
-  opacity:0;
-  transform:translateY(40px);
-  transition:.6s;
-}
-.show{
-  opacity:1;
-  transform:translateY(0);
-}
-
-/* MOBILE */
-.mobile-btn{
-  position:fixed;
-  bottom:0;
-  width:100%;
-  background:linear-gradient(90deg,#3b82f6,#9333ea);
-  padding:15px;
-  text-align:center;
-  font-weight:600;
-}
 </style>
 </head>
 
 <body>
 
-<canvas id="particles"></canvas>
-
+<!-- NAV -->
 <nav>
-<div>🎮 Tikva</div>
+<div>🎮 Tikva Games</div>
 <div>
 <a href="#game">Game</a>
-<a href="#team">Team</a>
-<a href="#roadmap">Roadmap</a>
+<a href="#screens">Screens</a>
+<a href="#features">Features</a>
 </div>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
-<div class="hero-bg"></div>
-<div class="hero-content">
-<h1>ENTER THE NEXT GENERATION OF GAMING</h1>
-<p>Skill-based experiences. Real competition. Real rewards.</p>
-<a href="#" class="btn">Download Now</a>
+<div>
+<h1>Play Smart. Have Fun. Win More.</h1>
+<p>Experience next-gen casual gaming with learning + fun</p>
+<a href="#" class="btn">Coming Soon</a>
 </div>
 </section>
 
-<section id="game" class="fade">
-<h2>Featured Game</h2>
+<!-- GAME -->
+<section id="game">
+<h2>🎮 Featured Game</h2>
+
 <div class="card">
 <h3>Think Fast!</h3>
-<p>Fast-paced puzzle game to test your brain speed.</p>
-<p>⭐ 4.8 Rating • 10K+ Players</p>
+<p>A fast-paced 2D falling puzzle game combining logic, speed, and fun.</p>
+<br>
+<p>🧠 Math • 🌍 GK • 🔺 Visual • 🎉 FunZone</p>
+<br>
 <a class="btn">Watch Trailer</a>
 </div>
 </section>
 
-<section class="fade">
-<h2>Why Tikva</h2>
+<!-- SCREENSHOTS -->
+<section id="screens">
+<h2>📸 Gameplay Preview</h2>
+
 <div class="grid">
-<div class="box">🧠 Skill-Based Gameplay</div>
-<div class="box">💰 Real Rewards</div>
-<div class="box">🌍 Global Competition</div>
+<img src="game1.jpg" class="game-img">
+<img src="game2.jpg" class="game-img">
+<img src="game3.jpg" class="game-img">
 </div>
+
 </section>
 
-<section id="team" class="fade">
-<h2>Our Team</h2>
-<div class="team">
-<div class="member">Founder</div>
-<div class="member">Developer</div>
-<div class="member">Designer</div>
+<!-- FEATURES -->
+<section id="features">
+<h2>🚀 Why Tikva Games</h2>
+
+<div class="grid">
+<div class="card">🧠 Smart Learning Gameplay</div>
+<div class="card">⚡ Fast & Addictive Experience</div>
+<div class="card">🎉 FunZone Effects & Rewards</div>
+<div class="card">🎮 Smooth UI & Controls</div>
 </div>
+
 </section>
 
-<section id="roadmap" class="fade">
-<h2>Roadmap</h2>
-<div class="road">Q1: Launch</div>
-<div class="road">Q2: Multiplayer</div>
-<div class="road">Q3: Tournaments</div>
-<div class="road">Q4: New Games</div>
-</section>
+<!-- FUNZONE -->
+<section>
+<h2>🎉 FunZone Mode</h2>
 
-<section class="fade">
-<h2>Impact</h2>
-<div class="stats">
-<div>10K+ Players</div>
-<div>₹1L+ Rewards</div>
-<div>Top Ranked</div>
+<div class="card">
+<p>
+Experience pure fun with jelly physics, balloon pops, slow motion, and satisfying effects.
+No pressure. Just fun.
+</p>
 </div>
+
 </section>
 
+<!-- ROADMAP -->
+<section>
+<h2>🗺️ Roadmap</h2>
+
+<div class="card">Q1: Game Launch</div><br>
+<div class="card">Q2: New Modes + Levels</div><br>
+<div class="card">Q3: Leaderboards</div><br>
+<div class="card">Q4: Multiplayer</div>
+
+</section>
+
+<!-- CTA -->
+<section>
+<h2>🚀 Get Ready</h2>
+<p>We are building something exciting. Stay tuned!</p>
+<a href="#" class="btn">Download Soon</a>
+</section>
+
+<!-- FOOTER -->
 <footer>
 <p>© 2026 Tikva Games</p>
 </footer>
-
-<div class="mobile-btn">Download App</div>
-
-<script>
-// PARALLAX
-window.addEventListener('scroll',()=>{
-  document.querySelector('.hero-bg').style.transform =
-    `translateY(${window.scrollY * 0.4}px)`;
-});
-
-// SCROLL ANIMATION
-const faders = document.querySelectorAll('.fade');
-window.addEventListener('scroll',()=>{
-  faders.forEach(el=>{
-    if(el.getBoundingClientRect().top < window.innerHeight - 100){
-      el.classList.add('show');
-    }
-  });
-});
-
-// PARTICLES
-const canvas = document.getElementById("particles");
-const ctx = canvas.getContext("2d");
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let particles = [];
-
-for(let i=0;i<80;i++){
-  particles.push({
-    x:Math.random()*canvas.width,
-    y:Math.random()*canvas.height,
-    r:Math.random()*2,
-    d:Math.random()*1
-  });
-}
-
-function draw(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  ctx.fillStyle="#3b82f6";
-  particles.forEach(p=>{
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fill();
-  });
-  update();
-}
-
-function update(){
-  particles.forEach(p=>{
-    p.y += p.d;
-    if(p.y > canvas.height){
-      p.y = 0;
-      p.x = Math.random()*canvas.width;
-    }
-  });
-}
-
-setInterval(draw,30);
-</script>
 
 </body>
 </html>
